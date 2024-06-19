@@ -4,7 +4,7 @@ export const Storecontext = createContext();
 
 const StorecontextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState({});
-  const url = "http://localhost:4000";
+  const url = "https://sizzlespot-2.onrender.com";
   const [token, setToken] = useState("");
   const [food_list, setFood_list] = useState([]);
 
