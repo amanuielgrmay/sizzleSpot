@@ -33,7 +33,7 @@ const Navbar = ({ setShowlogin }) => {
         </Link>
 
         <a
-          href="http://localhost:5173/#explore-menu"
+          href="https://sizzlespot-frontend.onrender.com/#explore-menu"
           onClick={() => setMenu("menu")}
           className={menu === "menu" ? "active" : ""}
         >
