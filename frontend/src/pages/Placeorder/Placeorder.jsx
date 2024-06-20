@@ -3,8 +3,9 @@ import "./Placeorder.css";
 import { Storecontext } from "../../Context/Storecontext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 const Placeorder = () => {
-  const { getTotalCartAmount, token, food_list, cartItems, url } =
+  const { getTotalCartAmount, token, food_list, cartItems, setCartItems, url } =
     useContext(Storecontext);
 
   const [data, setData] = useState({
@@ -49,15 +50,18 @@ const Placeorder = () => {
       address: data,
       items: orderItems,
       amount: getTotalCartAmount() + 2,
+      paymentMethod: "Cash on Delivery",
     };
+
     try {
       const response = await axios.post(`${url}/api/order/place`, orderData, {
         headers: { token },
       });
 
       if (response.data.success) {
-        const { session_url } = response.data;
-        window.location.replace(session_url);
+        alert("Order placed successfully! Please prepare cash for delivery.");
+        setCartItems([]);
+        navigate("/");
       } else {
         alert("Error placing order");
       }
@@ -181,7 +185,7 @@ const Placeorder = () => {
               {getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2}
             </div>
             <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Placing Order..." : "PROCEED TO PAYMENT"}{" "}
+              {isSubmitting ? "Placing Order..." : "PLACE ORDER"}
             </button>
           </div>
         </div>
