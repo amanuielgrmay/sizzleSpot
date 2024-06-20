@@ -7,6 +7,7 @@ const StorecontextProvider = ({ children }) => {
   const url = "https://sizzlespot-2.onrender.com";
   const [token, setToken] = useState("");
   const [food_list, setFood_list] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart"));
@@ -57,8 +58,15 @@ const StorecontextProvider = ({ children }) => {
     return totalAmount;
   };
   const fetchFoodList = async () => {
-    const response = await axios.get(url + "/api/food/list");
-    setFood_list(response.data.data);
+    await new Promise((resolve) => setTimeout(resolve, 30000));
+    try {
+      const response = await axios.get(url + "/api/food/list");
+      setFood_list(response.data.data);
+    } catch (error) {
+      console.error("Error fetching food list:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const loadCartData = async (token) => {
@@ -91,6 +99,7 @@ const StorecontextProvider = ({ children }) => {
     url,
     token,
     setToken,
+    loading,
   };
 
   return (
