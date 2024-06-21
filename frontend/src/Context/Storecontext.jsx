@@ -58,7 +58,6 @@ const StorecontextProvider = ({ children }) => {
     return totalAmount;
   };
   const fetchFoodList = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 30000));
     try {
       const response = await axios.get(url + "/api/food/list");
       setFood_list(response.data.data);
