@@ -41,7 +41,7 @@ const Navbar = ({ setShowlogin }) => {
         </a>
 
         <a
-          href="#app-download"
+          href="https://sizzlespot-frontend.onrender.com#app-download"
           onClick={() => setMenu("mobile-app")}
           className={menu === "mobile-app" ? "active" : ""}
         >
